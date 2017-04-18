@@ -1,0 +1,3 @@
+{% for project in listProjects %}
+	<a href="{{ path('front_office_project_one',{id:project.id}) }}" style="margin-left:15px;">{{ project.name|capitalize }}</a><br><br>
+{% endfor %}

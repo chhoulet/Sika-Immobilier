@@ -1,0 +1,55 @@
+front_office_homepage:
+    path:     /
+    defaults: { _controller: FrontOfficeBundle:Default:homepage }
+
+# Gestion des Projets:
+front_office_project_one:
+    path:    /frontOffice/Project/one/{id}
+    defaults: { _controller: FrontOfficeBundle:Project:one}
+    requirements:
+        id: "[0-9]+"
+
+front_office_project_sidebar_list:
+    path:    /frontOffice/Project/sidebar_list 
+    defaults: { _controller: FrontOfficeBundle:Project:list}
+
+# Gestion des lots :
+front_office_lots_plots:
+    path:    /frontOffice/Lots/Plots /{idProject}
+    defaults: { _controller: FrontOfficeBundle:Lots:plots}
+    requirements:
+        idProject: "[0-9]+"
+
+front_office_lots_houses:
+    path:    /frontOffice/Lots/Houses /{idProject}
+    defaults: { _controller: FrontOfficeBundle:Lots:houses}
+    requirements:
+        idProject: "[0-9]+"
+
+front_office_lots_apartments:
+    path:    /frontOffice/Lots/Apartments /{idProject}
+    defaults: { _controller: FrontOfficeBundle:Lots:apartments}
+    requirements:
+        idProject: "[0-9]+"
+
+front_office_lots_shops:
+    path:    /frontOffice/Lots/Shops /{idProject}
+    defaults: { _controller: FrontOfficeBundle:Lots:shops}
+    requirements:
+        idProject: "[0-9]+"
+
+# Gestion des partenaires:
+front_office_partner_list:
+    path:     /frontOffice/Partner/list/{id}
+    defaults: { _controller: FrontOfficeBundle:Partner:list}
+    requirements:
+        id: "[0-9]+"
+
+# Gestion des slots:
+front_office_slots_contact:
+    path:     /frontOffice/slots/contact 
+    defaults: { _controller: FrontOfficeBundle:Slots:contact}
+
+front_office_slots_about:
+    path:     /frontOffice/slots/about 
+    defaults: { _controller: FrontOfficeBundle:Slots:about}

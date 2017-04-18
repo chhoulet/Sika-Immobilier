@@ -1,0 +1,105 @@
+{% extends '::base.html.twig' %}
+
+	{% block title %}{{ project.name|upper }}{% endblock %}
+
+	{% block thematic %}
+
+		<div id="wrapper">
+
+        <!-- Sidebar -->
+	        <div id="sidebar-wrapper" style="margin-top:20px;">
+	            <ul class="sidebar-nav">
+	                <li class="sidebar-brand">
+	                    <a href="#">
+	                        Projets en cours
+	                    </a>
+	                </li>	                
+	                {{ render(controller('FrontOfficeBundle:Project:list')) }}
+	            </ul>
+	        </div>
+
+			<div id="page-content-wrapper">
+	            <div class="container-fluid">
+
+	{% endblock %}	
+
+	{% block body %}		
+
+			        <div class="row">
+			            <div class="box">
+			                <div class="col-lg-12">
+			                    <hr>
+				                    <h2 class="intro-text text-center">
+				                        {{ project.name|upper }}
+				                    </h2>
+			                    <hr>
+
+			                    <div class="col-md-12 text-center" style="margin-top:35px;margin-bottom:35px;border:1 solid black;background-color:rgb(252,226,192);border-radius:7px;">
+			                    	<h4 style="text-align:left;margin-top:15px;margin-bottom:15px;">Voir les disponibilités par type de bien :</h4>
+				                    	{{form_start(form)}}
+				                    	
+				                    	{% for child in form.typeOfLots %}
+											<div class="col-md-3">
+												{{ form_label(child) }}<br>
+												{{ form_widget(child) }}
+											</div>										
+										{% endfor %}
+			                    	<div class="col-md-12 text-center" style="margin-top:15px;margin-bottom:15px;">{{form_end(form)}}</div>
+			                    
+			                    </div>
+			                    
+			                    <div class="col-md-8">
+				                    <!-- Embedded Google Map using an iframe - to select your location find it on Google maps and paste the link as the iframe src. If you want to use the Google Maps API instead then have at it! -->
+				                    <iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?hl=en&amp;ie=UTF8&amp;ll={{project.latitude}},{{project.longitude}}&amp;spn=56.506174,79.013672&amp;t=m&amp;z=4&amp;output=embed"></iframe>
+				                </div>
+				                <div class="col-md-4" style="text-align: center;margin-top:80px;">
+
+				                	<p style="color:rgb(236,254,250);border:1 solid black;border-radius:12px;background-color:blue">Nombre de biens total : {{ project.nbrEstates }}</p><br><br>			                    
+				                    
+				                    <a href="{{ path('front_office_partner_list',{id:project.id}) }}"><p style="color:rgb(236,254,250);border:1 solid black;border-radius:12px;background-color:blue">Voir nos partenaires sur ce projet</p></a>
+				                    
+				                </div>                 
+			                </div>
+
+			                <hr>
+
+			                <div class="col-lg-12 text-center">
+			                	{% for img in project.image %}
+				                    <h2>Date de lancement :<br>
+				                        <small>{{ project.dateLaunching|date('m-d-Y')}}</small>	                        
+				                    </h2>
+			                    	<img class="img-responsive img-border img-full" src="{{ asset('uploads/images/'~ img.filename) }}" alt="">
+				                {% endfor %}<br>
+			                    <p style="text-align: justify;">{{ project.comment }}</p>                    
+			                    <hr><br>
+			                </div>
+			                {% if project.comment1 is not null %}
+				                <div class="col-lg-12 text-center">
+				                	{% for img in project.image %}
+					                	{% if img.filename1 is not null %}
+						                    <img class="img-responsive img-border img-full" src="{{ asset('uploads/images/'~img.filename1) }}" alt="">
+						                {% endif %}
+						            {% endfor %}<br>
+				                    <p style="text-align: justify;">{{ project.comment1 }}</p>
+				                    <hr><br>
+				                </div>
+				            {% endif %}
+				            {% if project.comment2 is not null %}
+				                <div class="col-lg-12 text-center">
+				                	{% for img in project.image %}
+					                	{% if img.filename2 is not null %}
+						                    <img class="img-responsive img-border img-full" src="{{ asset('uploads/images/'~img.filename2) }}" alt="">	
+						                {% endif %}
+						            {% endfor %}<br>
+				                    <p style="text-align: justify;">{{ project.comment2 }}</p>
+				                    <hr>
+				                </div>
+				            {% endif %}                
+			            </div>
+			        </div>
+
+	    		</div>
+	    	</div>
+
+	    </div>
+	{% endblock %}

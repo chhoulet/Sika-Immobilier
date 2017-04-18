@@ -1,0 +1,92 @@
+{% extends '::base.html.twig' %}
+
+	{% block title %}Contact{% endblock %}
+
+	{% block body %}
+
+		<div class="container">	
+					
+
+	        <div class="row">
+	            <div class="box">
+	                <div class="col-lg-12">
+	                    <hr>
+	                    <h2 class="intro-text text-center">Contact
+	                        <strong></strong>
+	                    </h2>
+	                    <hr>
+
+	                    {% for message in app.session.flashBag.get('messageCreated') %}
+							<div id="flash"><span class="glyphicon glyphicon-ok">{{ message }}</div>
+						{% endfor %}
+						
+	                </div>
+	                <div class="col-md-12">
+	                    <p>Téléphone:
+	                        <strong>+33 (0)6 80 46 58 30</strong>
+	                    </p>
+	                    <p>Mail:
+	                        <strong><a href="mailto:name@example.com">fabian.baraduc@fbfs.expert</a></strong>
+	                    </p>
+	                    <p>Adresse:
+	                        <strong>A compléter
+	                            <br></strong>
+	                    </p>
+	                </div>
+	                <div class="clearfix"></div>
+	            </div>
+	        </div>
+
+	        <div class="row">
+	            <div class="box">
+	                <div class="col-lg-12">
+	                    <hr>
+	                    <h2 class="intro-text text-center">Formulaire de
+	                        <strong>Contact</strong>
+	                    </h2>
+	                    <hr>
+	                    <p>Une question ? Vous souhaites des renseignements supplémentaires ? N'hésitez pas à nous envoyer un message, nous vous répondrons dès que possible !</p>
+	                    
+	                        <div class="row">
+	                        	{{ form_start(form)}}
+	                            <div class="form-group col-lg-4">
+	                                <label>Nom</label>
+	                                {{form_widget(form.nom)}}	                               
+	                            </div>
+	                            <div class="form-group col-lg-4">
+	                                <label>Adresse mail</label>
+	                                {{form_widget(form.mail)}}	                                
+	                            </div>
+	                            <div class="form-group col-lg-4">
+	                                <label>Téléphone</label>
+	                                {{form_widget(form.phone)}}	                                
+	                            </div>
+	                            <div class="form-group col-lg-4">
+	                                <label>Objectif</label>
+	                                {{form_widget(form.purpose)}}	                               
+	                            </div>
+	                            <div class="form-group col-lg-4">
+	                                <label>Projet</label>
+	                                {{form_widget(form.project)}}	                               
+	                            </div>
+	                            <div class="form-group col-lg-4">
+	                                <label>Type de bien</label>
+	                                {{form_widget(form.typeOfLot)}}	                               
+	                            </div>
+	                            <div class="clearfix"></div>
+	                            <div class="form-group col-lg-12">
+	                                <label>Message</label>
+	                                {{form_widget(form.main)}}	                                
+	                            </div>
+	                            <div class="form-group col-lg-12 text-center" style="margin-top:25px;">
+	                                {{ form_end(form)}}
+	                            </div>
+	                        </div>
+	                   
+	                </div>
+	            </div>
+	        </div>
+
+	    </div>
+
+	{% endblock %}

@@ -1,0 +1,119 @@
+{% extends '::base.html.twig' %}
+
+	{% block title %}Disponibilités{% endblock %}
+
+	{% block thematic %} 
+
+		<div id="wrapper">
+
+        <!-- Sidebar -->
+	        <div id="sidebar-wrapper" style="margin-top:20px;">
+	            <ul class="sidebar-nav">
+	                <li class="sidebar-brand">
+	                    <a href="#">
+	                        Projets en cours
+	                    </a>
+	                </li>	                
+	                {{ render(controller('FrontOfficeBundle:Project:list')) }}
+	            </ul>
+	        </div>
+
+			<div id="page-content-wrapper">
+	            <div class="container-fluid">
+
+	{% endblock %}
+
+	{% block body %}		
+
+			        <div class="row">
+			            <div class="box">
+			                <div class="col-lg-12" style="margin-bottom:35px;">
+			                    <hr>
+				                    <h2 class="intro-text text-center">
+				                        <strong>{{ project.name|upper }}</strong>
+				                    </h2>
+			                    <hr>
+			                    <h3>                  
+		                            <div class="col-md-3" style="margin-bottom:15px;border:solid 1px black;border-radius:38px;background-color: rgb(244, 215, 66);text-align:center;margin-top:35px;margin-left:255px;">Nombre total de commerces : {{ nbrShopsTotal }}
+		                            </div>
+		                            <div class="col-md-3" style="margin-bottom:15px;border:solid 1px black;border-radius:38px;background-color: rgb(244, 215, 66);text-align:center;margin-top:35px;margin-left:255px;">{% if nbrShops <= 1 %}Disponible : {% else %} Disponibles : {% endif %}{{ nbrShops }}
+		                            </div><br>                       
+		                        </h3> 			                    
+			                </div>
+
+			                
+			               	{% if listShops is not null and listShops is not empty %}
+							    <div class="row">
+									<div class="col-md-12">
+							            <div class="panel panel-primary">
+							                <div class="panel-heading">
+							                    <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Liste des commerces disponibles</h3>
+							                </div>
+							                <div class="panel-body">
+							                    <div class="table-responsive">
+							                        <table class="table table-bordered table-hover table-striped">
+							                            <thead>
+							                                <tr>
+							                                    <th>Numéro</th>
+							                                    <th>Type</th>
+							                                    <th>Commentaire</th>                    				                                    
+							                                    <th>Images</th>                                    
+							                                    <th>Prix €</th>
+							                                    <th>Prix CFA</th>							                                   
+							                                </tr>
+							                            </thead>
+							                            <tbody>
+							                                {% for house in listShops %}
+							                                	<tr>
+								                                    <td>{{ house.id }}</td>
+								                                    <td>{{ house.type }}</td>
+								                                    <td style="text-align: justify;">{{ house.comment }}</td>
+								                                    <td>
+								                                    	{% for image in house.image %}
+								                                    		<div class="zoom">
+								                                    			<div class="image">
+								                                    				<img src="{{ asset('uploads/images/'~ image.filename) }}" alt="" style="height:120px;width:190px;margin-top:10px;">
+								                                    			</div>
+								                                    		</div>
+							                                    			<div class="zoom">
+							                                    				<div class="image">
+							                                    					<img src="{{ asset('uploads/images/'~ image.filename1) }}" alt="" style="height:120px;width:190px;margin-top:10px;">
+							                                    				</div>
+								                                    		</div>
+							                                    			<div class="zoom">
+							                                    				<div class="image">
+							                                    					<img src="{{ asset('uploads/images/'~ image.filename2) }}" alt="" style="height:120px;width:190px;margin-top:10px;">
+							                                    				</div>
+								                                    		</div>
+							                                    			<div class="zoom">
+							                                    				<div class="image">
+							                                    					<img src="{{ asset('uploads/images/'~ image.filename3) }}" alt="" style="height:120px;width:190px;margin-top:10px;">
+							                                    				</div>
+								                                    		</div>
+								                                    	{% endfor %}
+								                                    </td>             							                                   
+								                                    <td>{{ house.price }} €</td>
+								                                    <td>{{ house.priceCFA }} CFA</td>   		                                    
+							                                	</tr>                                            
+								                            {% endfor %}
+							                            </tbody>
+							                        </table>
+							                    </div>					                    
+							                </div>
+							            </div>
+							        </div>
+							    </div>
+					    	{% endif %}		    	
+
+					    	
+				        </div>
+			    	</div>
+
+				</div>
+			</div>
+
+		</div>		
+
+	{% endblock %}
+
+	

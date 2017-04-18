@@ -1,0 +1,98 @@
+{% extends '::base.html.twig' %}
+
+	{% block title %}Disponibilités{% endblock %}
+
+	{% block thematic %} 
+
+		<div id="wrapper">
+
+        <!-- Sidebar -->
+	        <div id="sidebar-wrapper" style="margin-top:20px;">
+	            <ul class="sidebar-nav">
+	                <li class="sidebar-brand">
+	                    <a href="#">
+	                        Projets en cours
+	                    </a>
+	                </li>	                
+	                {{ render(controller('FrontOfficeBundle:Project:list')) }}
+	            </ul>
+	        </div>
+
+			<div id="page-content-wrapper">
+	            <div class="container-fluid">
+
+	{% endblock %}
+
+	{% block body %}		
+
+			        <div class="row">
+			            <div class="box">
+			                <div class="col-lg-12" style="margin-bottom:35px;">
+			                    <hr>
+				                    <h2 class="intro-text text-center">
+				                        <strong>{{ project.name|upper }}</strong>
+				                    </h2>
+			                    <hr>
+			                    <h3>
+			                    	{% if project.mapPlots is not null %}
+				                    	<div class="col-md-12 text-center" style="margin-top:20px;margin-bottom:20px;line-height:20px;">
+				                    		<a href="{{ asset('uploads/plans/' ~ project.mapPlots) }}" target="_blank">Voir les plans (PDF)</a>
+				                    	</div>
+				                    {% endif %}              
+				                    
+		                            <div class="col-md-3" style="margin-bottom:15px;border:solid 1px black;border-radius:38px;background-color: rgb(244, 215, 66);text-align:center;margin-top:35px;margin-left:255px;">Total des terrains : {{ nbrTotalPlots }}
+		                            </div>
+		                            <div class="col-md-3" style="margin-bottom:15px;border:solid 1px black;border-radius:38px;background-color: rgb(244, 215, 66);text-align:center;margin-top:35px;margin-left:255px;">{% if nbrPlots <= 1 %}Disponible : {% else %} Disponibles : {% endif %}{{ nbrPlots }}
+		                            </div><br>                       
+		                        </h3> 			                    
+			                </div>
+
+			                
+			               	{% if listPlots is not null and listPlots is not empty %}
+				                <div class="row">
+									<div class="col-md-12">
+							            <div class="panel panel-primary">
+							                <div class="panel-heading">
+							                    <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Liste des parcelles disponibles</h3>
+							                </div>
+							                <div class="panel-body">
+							                    <div class="table-responsive">
+							                        <table class="table table-bordered table-hover table-striped">
+							                            <thead>
+							                                <tr>
+							                                    <th>Numéro</th>
+							                                    <th>Prix €</th>
+							                                    <th>Prix CFA</th>
+							                                    <th>Commentaire</th>                     				                                    
+							                                </tr>
+							                            </thead>
+							                            <tbody>
+							                                {% for plot in listPlots %}
+							                                	<tr>
+								                                    <td>{{ plot.number }}</td>
+								                                    <td>{{ plot.price }} €</td>
+								                                    <td>{{ plot.priceCFA }} CFA</td>
+								                                    <td style="text-align: justify;">{{ plot.comment}}</td>       		                      
+							                                	</tr>                                      
+								                            {% endfor %}
+							                            </tbody>
+							                        </table>
+							                    </div>					                    
+							                </div>
+							            </div>
+							        </div>
+							    </div>
+					    	{% endif %}					    	
+
+					    	
+				        </div>
+			    	</div>
+
+				</div>
+			</div>
+
+		</div>		
+
+	{% endblock %}
+
+	
