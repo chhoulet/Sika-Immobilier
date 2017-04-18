@@ -1,0 +1,137 @@
+{% extends '::baseAdmin.html.twig' %}
+
+	{% block title %}Liste des clients{% endblock %}
+
+	{% block body %}
+
+		<div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            <div style="margin-bottom:15px;" class="col-md-12">Liste des clients :</div>
+                        </h1>                              
+                    </div>
+                </div>
+                                           
+                <div class="row">
+					<div class="col-md-12">
+			            <div class="panel panel-primary">
+			                <div class="panel-heading">
+			                    <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Liste des clients</h3>
+			                </div>
+			                <div class="panel-body">
+			                    <div class="table-responsive">
+			                        <table class="table table-bordered table-hover table-striped" id="myTable">
+			                            <thead>
+			                                <tr>
+			                                    <th>Nom & Prénom</th>
+			                                    <th>Adresse complète</th>
+			                                    <th>Téléphone</th>
+			                                    <th>Mail</th>
+			                                    <th colspan=2>Parcelle</th>
+			                                    <th colspan=2>Appartement</th>
+			                                    <th colspan=2>Maison</th>
+			                                    <th>Projet</th>
+			                                </tr>
+			                            </thead>
+			                            <tbody>
+			                                {% if listUsers is not null and listUsers is not empty %}
+			                                	{% for user in listUsers %}
+			                                		<tr>
+					                                    <td>{{ user.name|upper ~' '~ user.firstname|capitalize }}</td>
+					                                    <td>{{ user.adress ~' '~ user.city|capitalize ~' '~ user.postcode }}</td>
+					                                    <td>{{ user.phone }}</td>
+					                                    <td>{{ user.email }}</td>
+					                                    <td>
+					                                    	{% if user.plot is not empty %}
+					                                    		{% for plot in user.plot %}
+					                                    			<p>Numéro : {{ plot.number }}</p>
+					                                    		{% endfor %}
+					                                    	{% endif %}						                                    	
+					                                    </td>
+					                                    <td>
+					                                    	{% if user.plot is not empty %}
+					                                    		{% for plot in user.plot %}
+						                                    		{% if plot.state == 2 %}
+							                                    		<p style="color:rgb(134,201,123)";>Promesse signée</p>
+							                                    	{% else %}
+							                                    		<p style="color:rgb(69,131,237);">Lot vendu</p>
+							                                    	{% endif %}
+							                                    {% endfor %}
+					                                    	{% endif %}
+					                                    </td>
+					                                    <td>
+					                                    	{% if user.apartment is not empty %}
+					                                    		{% for apart in user.apartment %}
+					                                    			<p>Numéro : {{apart.id}}</p>
+					                                    		{% endfor %}
+					                                    	{% endif %}
+					                                    </td>
+					                                    <td>
+					                                    	{% if user.apartment is not empty %}
+					                                    		{% for apart in user.apartment %}
+						                                    		{% if apart.state == 2 %}
+							                                    		<p style="color:rgb(134,201,123)";>Promesse signée</p>
+							                                    	{% else %}
+							                                    		<p style="color:rgb(69,131,237);">Lot vendu</p>
+							                                    	{% endif %}
+							                                    {% endfor %}
+					                                    	{% endif %}						                                    	
+					                                    </td>
+					                                    <td>
+					                                    	{% if user.house is not empty %}
+					                                    		{% for hou in user.house %}
+					                                    			<p>Numéro : {{hou.id}}</p>
+					                                    		{% endfor %}
+					                                    	{% endif %}
+					                                    </td>
+					                                    <td>
+					                                    	{% if user.house is not empty %}
+						                                    	{% for houseState in user.house %}
+						                                    		{% if houseState.state == 2 %}
+							                                    		<p style="color:rgb(134,201,123)";>Promesse signée</p>
+							                                    	{% else %}
+							                                    		<p style="color:rgb(69,131,237);">Lot vendu</p>
+							                                    	{% endif %}
+							                                    {% endfor %}
+					                                    	{% endif %}
+					                                    </td>
+					                                    <td>
+					                                    	{% if user.plot is not empty %}
+					                                    		{% for plot in user.plot %}
+					                                    			<p>{{ plot.project.name|upper }}</p>
+					                                    		{% endfor %}
+					                                    	{% endif %}
+
+					                                    	{% if user.apartment is not empty %}
+					                                    		{% for apartment in user.apartment %}
+					                                    			<p>{{ apartment.project.name|upper }}</p>
+					                                    		{% endfor %}
+					                                    	{% endif %}
+
+					                                    	{% if user.house is not empty %}
+					                                    		{% for house in user.house %}
+					                                    			<p>{{ house.project.name|upper }}</p>
+					                                    		{% endfor %}
+					                                    	{% endif %}
+					                                    </td>
+			                                		</tr>                                      
+				                                {% endfor %}
+				                            {% endif %}
+			                            </tbody>
+			                        </table>
+			                    </div>			                    
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+			    		   
+                
+	{% endblock %}
+
+	
+						                                    		

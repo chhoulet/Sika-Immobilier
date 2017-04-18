@@ -1,0 +1,227 @@
+{% extends '::baseAdmin.html.twig' %}
+
+	{% block title %}Création des projets{% endblock %}
+
+	{% block body %}
+
+		<div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Gestion des projets</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+            {% for message in app.session.flashBag.get('createProject') %}
+            	<div id="flash">
+            		{{message}}
+            	</div>
+            {% endfor %}
+
+            {% for messag in app.session.flashBag.get('updateProject') %}
+            	<div id="flash">
+            		{{messag}}
+            	</div>
+            {% endfor %}                      
+
+            <div class="row" style="margin-top:25px;">
+	            <div class="col-lg-12">
+	                <div class="panel panel-success">
+	                    <div class="panel-heading">
+	                    	{% if affich == 1 %}
+	                        	Créer un nouveau projet
+	                    	{% else %}
+	                    		Mettre à jour ce projet
+	                    	{% endif %}
+	                    </div>
+	                    <div class="panel-body" style="text-align: center;">
+	                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalP">Ouvrir le formulaire</button>
+	                    </div>
+	                    <div class="panel-footer">                        
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+
+	        <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Création des lots</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+            <div class="row" style="margin-top:25px;">
+	            <div class="col-lg-12">
+	                <div class="panel panel-success">
+	                    <div class="panel-heading">
+	                    	Créer un lot 
+	                    </div>
+	                    <div class="panel-body" style="text-align: center;">
+		                    <div class="col-md-4 text-center" style="margin-top:15px;">
+		                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Créer une parcelle</button>
+		                    </div>
+		                    <div class="col-md-4 text-center" style="margin-top:15px;">
+		                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalM">Créer une maison</button>
+		                    </div>
+		                    <div class="col-md-4 text-center" style="margin-top:15px;">
+		                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalA">Créer un appartement</button>
+		                    </div>	                
+		                    <div class="panel-footer">                        	               
+		                    </div>
+		                </div>
+	                </div>
+	            </div>
+	        </div>
+        
+
+
+            <div id="myModalP" class="modal fade" role="dialog">
+			  	<div class="modal-dialog">
+
+				    <!-- Modal content-->
+				    <div class="modal-content">
+					      <div class="modal-header" style="background-color: rgb(49,176,213);">
+					        <button type="button" class="close" data-dismiss="modal">&times;</button>
+					        <h4 class="modal-title">
+					        	{% if affich == 1 %}
+	                        		Nouveau projet
+	                    		{% else %}
+	                    			Mettre à jour ce projet
+	                    		{% endif %}
+					        </h4>
+					      </div>
+					      <div class="modal-body">
+					        <p>{{ form_start(form)}}</p>
+					        <p>{{ form_row(form.name)}}</p>
+					        <label>Date de lancement : *</label>
+					        <p>{{ form_widget(form.dateLaunching)}}</p>
+					        <p>{{ form_row(form.latitude)}}</p>
+					        <p>{{ form_row(form.longitude)}}</p>
+					        <p>{{ form_row(form.mapPlots)}}</p>
+					        <p>{{ form_row(form.comment)}}</p>
+					        <p>{{ form_row(form.comment1)}}</p>
+					        <p>{{ form_row(form.comment2)}}</p>
+					        {% for img in form.image %}
+						        <p>{{ form_row(img.filename) }}</p>
+						        <p>{{ form_row(img.filename1) }}</p>
+						        <p>{{ form_row(img.filename2) }}</p>
+						        <p>{{ form_row(img.filename3) }}</p>
+						    {% endfor %}
+					        <div style="margin-top:25px;text-align: center;">{{ form_end(form)}}</div>
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+					      </div>
+				    </div>
+
+			  	</div>
+			</div>
+
+			<div id="myModal" class="modal fade" role="dialog">
+		  	<div class="modal-dialog">
+
+			    <!-- Modal content-->
+			    <div class="modal-content">
+				      <div class="modal-header" style="background-color: rgb(49,176,213);">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+				        <h4 class="modal-title">
+				        	Ajouter une parcelle
+				        </h4>
+				      </div>
+				      <div class="modal-body">
+				        <p>{{ form_start(formPlot)}}</p>
+				        <p>{{ form_row(formPlot.number)}}</p>
+				        <p>{{ form_row(formPlot.price)}}</p>
+				        <p>{{ form_row(formPlot.priceCFA)}}</p>
+				        <p>{{ form_row(formPlot.comment)}}</p>
+				        <p>{{ form_row(formPlot.project)}}</p>				        
+				        {% for img in formPlot.image %}
+					        <p>{{ form_row(img.filename) }}</p>
+					        <p>{{ form_row(img.filename1) }}</p>
+					        <p>{{ form_row(img.filename2) }}</p>
+					        <p>{{ form_row(img.filename3) }}</p>
+					    {% endfor %}
+				        <div style="margin-top:25px;text-align: center;">{{ form_end(formPlot)}}</div>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				      </div>
+			    </div>
+
+		  	</div>
+		</div>
+
+		<div id="myModalM" class="modal fade" role="dialog">
+		  	<div class="modal-dialog">
+
+			    <!-- Modal content-->
+			    <div class="modal-content">
+				      <div class="modal-header" style="background-color: rgb(49,176,213);">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+				        <h4 class="modal-title">
+				        	Ajouter une maison / un commerce
+				        </h4>
+				      </div>
+				      <div class="modal-body">
+				        <p>{{ form_start(formHouse)}}</p>
+				        <p>{{ form_row(formHouse.type)}}</p>				      
+				        <p>{{ form_row(formHouse.price)}}</p>
+				        <p>{{ form_row(formHouse.priceCFA)}}</p>
+				        <p>{{ form_row(formHouse.comment)}}</p>
+				        <p>{{ form_row(formHouse.project)}}</p>
+				        <p>{{ form_row(formHouse.shop)}}</p>
+				        {% for img in formHouse.image %}
+					        <p>{{ form_row(img.filename) }}</p>
+					        <p>{{ form_row(img.filename1) }}</p>
+					        <p>{{ form_row(img.filename2) }}</p>
+					        <p>{{ form_row(img.filename3) }}</p>
+					    {% endfor %}
+				        <div style="margin-top:25px;text-align: center;">{{ form_end(formHouse)}}</div>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				      </div>
+			    </div>
+
+		  	</div>
+		</div>
+
+		<div id="myModalA" class="modal fade" role="dialog">
+		  	<div class="modal-dialog">
+
+			    <!-- Modal content-->
+			    <div class="modal-content">
+				      <div class="modal-header" style="background-color: rgb(49,176,213);">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+				        <h4 class="modal-title">
+				        	Ajouter un appartement
+				        </h4>
+				      </div>
+				      <div class="modal-body">
+				        <p>{{ form_start(formApartment)}}</p>
+				        <p>{{ form_row(formApartment.nbrooms)}}</p>
+				        <p>{{ form_row(formApartment.surface)}}</p>
+				        <p>{{ form_row(formApartment.etage)}}</p>
+				        <p>{{ form_row(formApartment.price)}}</p>
+				        <p>{{ form_row(formApartment.priceCFA)}}</p>
+				        <p>{{ form_row(formApartment.comment)}}</p>
+				        <p>{{ form_row(formApartment.project)}}</p>
+				        {% for img in formApartment.image %}
+					        <p>{{ form_row(img.filename) }}</p>
+					        <p>{{ form_row(img.filename1) }}</p>
+					        <p>{{ form_row(img.filename2) }}</p>
+					        <p>{{ form_row(img.filename3) }}</p>
+					    {% endfor %}
+				        <div style="margin-top:25px;text-align: center;">{{ form_end(formApartment)}}</div>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				      </div>
+			    </div>
+
+		  	</div>
+		</div>
+
+
+
+	{% endblock %}

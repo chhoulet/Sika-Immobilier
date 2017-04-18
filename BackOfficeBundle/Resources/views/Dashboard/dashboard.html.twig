@@ -1,0 +1,293 @@
+{% extends 'baseAdmin.html.twig' %}
+
+	{% block body %}
+
+		<div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Dashboard <small>Statistiques</small>
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li class="active">
+                                <i class="fa fa-dashboard"></i> Dashboard
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- /.row -->   
+
+                {% for messa in app.session.flashBag.get('activatedProject') %}
+                    <div id="flash">
+                        {{messa}}
+                    </div>
+                {% endfor %}
+
+                {% for mess in app.session.flashBag.get('desactivatedProject') %}
+                    <div id="flash">
+                        {{mess}}
+                    </div>
+                {% endfor %} 
+
+                {% for message in app.session.flashBag.get('imagePlot') %}
+                    <div id="flash">{{ message }}</div>
+                {% endfor %}
+
+                {% for messag in app.session.flashBag.get('imageHouse') %}
+                    <div id="flash">{{ messag }}</div>
+                {% endfor %}
+
+                {% for messshop in app.session.flashBag.get('imageShop') %}
+                    <div id="flash">{{ messshop }}</div>
+                {% endfor %}
+
+                {% for messa in app.session.flashBag.get('imageApartment') %}
+                    <div id="flash">{{ messa }}</div>
+                {% endfor %}            
+
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-comments fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">{{message1}}</div>
+                                        <div>Messages RDV France</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="{{ path('back_message_list') }}">
+                                <div class="panel-footer">
+                                    <span class="pull-left">Voir la liste des messages</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-tasks fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">{{message2 }}</div>
+                                        <div>Messages RDV Paris</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="{{ path('back_message_list') }}">
+                                <div class="panel-footer">
+                                    <span class="pull-left">Voir la liste des messages</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-yellow">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-shopping-cart fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">{{message3}}</div>
+                                        <div>Messages RDV Gabon</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="{{ path('back_message_list') }}">
+                                <div class="panel-footer">
+                                    <span class="pull-left">Voir la liste des messages</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-red">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-support fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">{{message4}}</div>
+                                        <div>Demandes d'informations</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="{{ path('back_message_list') }}">
+                                <div class="panel-footer">
+                                    <span class="pull-left">Voir la liste des messages</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-support fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">{{message5}}</div>
+                                        <div>Clients à rappeller</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="{{ path('back_message_list') }}">
+                                <div class="panel-footer">
+                                    <span class="pull-left">Voir la liste des messages</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-support fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">{{ nbrLotsAvailable }}</div>
+                                        <div>{% if nbrLotsAvailable > 1 %}Lots disponibles {% else %} Lot disponible  {% endif %}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-yellow">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-support fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">{{nbrLotsPromise}}</div>
+                                        <div>{% if nbrLotsPromise > 1 %}Promesses de vente {% else %} Promesse de vente {% endif %}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <div class="panel-footer">                                    
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-red">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-support fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">{{nbrLotsSold}}</div>
+                                        <div>{% if nbrLotsSold > 1 %}Ventes effectuées {% else %}  Vente effectuée {% endif %}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <div class="panel-footer">                                
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row" style="margin-top:25px;">
+                    <div class="col-lg-12">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Projets :</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-striped" id="myTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Nom</th>
+                                                <th>Date de lancement</th>
+                                                <th>Commentaire</th>
+                                                <th>Commentaire 1</th>
+                                                <th>Commentaire 2</th>
+                                                <th>Nbr lots total</th>                                         
+                                                <th colspan="3">Images</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody style="text-align: justify;">
+                                            {% if listAllProjects is not null %}
+                                                {% for project in listAllProjects %}
+                                                    <tr>
+                                                        <td><strong>{{ project.name|upper }}</strong></td>
+                                                        <td>{{ project.dateLaunching|date('d-m-Y') }}</td>
+                                                        <td>{{ project.comment }}</td>
+                                                        <td>{{ project.comment1 }}</td>
+                                                        <td>{{ project.comment2 }}</td>
+                                                        <td>{{ project.nbrEstates }}</td>                                                  
+                                                        <td colspan="3">
+                                                            {% for img in project.image %}
+                                                                <img src="{{ asset('uploads/images/' ~ img.filename) }}" class="pirobox_gall" style="height:90px;width:130px;margin-bottom:15px;margin-left:5px;" alt="" title="Cliquez pour agrandir"/>
+                                                                <img src="{{ asset('uploads/images/' ~ img.filename1) }}" class="pirobox_gall" style="height:90px;width:130px;margin-bottom:15px;margin-left:5px;" alt="" title="Cliquez pour agrandir"/>                                      
+                                                                <img src="{{ asset('uploads/images/' ~ img.filename2) }}" class="pirobox_gall" style="height:90px;width:130px;margin-bottom:15px;margin-left:5px;" alt="" title="Cliquez pour agrandir"/>
+                                                                <img src="{{ asset('uploads/images/' ~ img.filename3) }}" class="pirobox_gall" style="height:90px;width:130px;margin-bottom:15px;margin-left:5px;" alt="" title="Cliquez pour agrandir"/>
+                                                            {% endfor %}
+                                                        </td>
+                                                        <td>
+                                                        {% if project.active == 1 %}
+                                                            <a href="{{ path('back_project_desactivate',{id:project.id}) }}" title="Désactiver ce projet" onclick="return(confirm('Etes-vous sûr de vouloir désactiver ce projet ?'))"><button style="margin-bottom: 10px;" class="btn btn-danger">Désactiver</button></a>
+                                                        {% else %}
+                                                            <a href="{{ path('back_project_activate',{id:project.id}) }}" title="Activer ce projet"><button style="margin-bottom: 10px;" class="btn btn-info">Activer</button></a>
+                                                        {% endif %}
+                                                        <a href="{{ path('back_project_admin',{affich:2, id:project.id}) }}" title="Mettre à jour ce projet"><button style="margin-bottom: 10px;" class="btn btn-warning">Mettre à jour</button></a>
+                                                        <a href="{{ path('back_lots_listByProject',{idProject:project.id}) }}" title="Voir la liste des lots"><button style="margin-bottom: 10px;" class="btn btn-info">Liste des lots</button></a>
+                                                        </td>
+                                                    </tr>                                                                                             
+                                                {% endfor %}
+                                            {% endif %}                                         
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>            
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+    {% endblock %}
+    

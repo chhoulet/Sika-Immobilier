@@ -1,0 +1,425 @@
+{% extends '::baseAdmin.html.twig' %}
+
+	{% block title %}Liste des lots par projet{% endblock %}
+
+	{% block body %}
+
+		<div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            <div style="margin-bottom:15px;" class="col-md-12">{{ project.name|upper }}<small> Liste & Etat des lots :</small></div>
+                        </h1>     
+                        <h3>                  
+                            <div class="col-md-3" style="margin-bottom:15px;border:solid 1px black;border-radius:38px;background-color: rgb(244, 215, 66);text-align:center;margin-top:35px;">Total des lots : {{ numberTotalByProject }} </div>
+                            <div class="col-md-3" style="margin-bottom:15px;border:solid 1px black;border-radius:38px;background-color: rgb(244, 215, 66);text-align:center;margin-top:35px;">{% if numberEstatesAvailable <= 1 %}Disponible : {% else %} Disponibles : {% endif %}{{ numberEstatesAvailable }} </div>
+                            <div class="col-md-3" style="margin-bottom:15px;border:solid 1px black;border-radius:38px;background-color: rgb(244, 215, 66);text-align:center;margin-top:35px;">{% if numberEstatesPromise <= 1 %} Promesse signée :{% else %} Promesses signées :{% endif %} {{numberEstatesPromise}}</div>
+                            <div class="col-md-3" style="margin-bottom:15px;border:solid 1px black;border-radius:38px;background-color: rgb(244, 215, 66);text-align:center;margin-top:35px;">{% if numberEstatesSold <= 1 %} Vente signée :{% else %} Ventes signées :{% endif %} {{numberEstatesSold}}</div>
+                        </h3> 
+                    </div>
+                </div>
+
+                {% for message in app.session.flashBag.get('state2') %}
+                	<div id="flash">{{ message }}</div>
+                {% endfor %}
+
+                {% for messag in app.session.flashBag.get('state1') %}
+                	<div id="flash">{{ messag }}</div>
+                {% endfor %}
+
+                {% for messa in app.session.flashBag.get('state3') %}
+                	<div id="flash">{{ messa }}</div>
+                {% endfor %}
+
+                {% for mess in app.session.flashBag.get('state1N') %}
+                	<div id="flash">{{ mess }}</div>
+                {% endfor %}
+
+                {% for mes in app.session.flashBag.get('state2N') %}
+                	<div id="flash">{{ mes }}</div>
+                {% endfor %}
+
+                {% for me in app.session.flashBag.get('state3N') %}
+                	<div id="flash">{{ me }}</div>
+                {% endfor %}
+
+                {% for digitalnumber in app.session.flashBag.get('apartment1') %}
+                	<div id="flash">{{ digitalnumber }}</div>
+                {% endfor %}
+
+                {% for messagen in app.session.flashBag.get('apartment2') %}
+                	<div id="flash">{{ messagen }}</div>
+                {% endfor %}
+
+                {% for digitalnumbe in app.session.flashBag.get('apartment3') %}
+                	<div id="flash">{{ digitalnumbe }}</div>
+                {% endfor %}
+
+                {% for digitalnumb in app.session.flashBag.get('apartment1N') %}
+                	<div id="flash">{{ digitalnumb }}</div>
+                {% endfor %}
+
+                {% for digitalnum in app.session.flashBag.get('apartment2N') %}
+                	<div id="flash">{{ digitalnum }}</div>
+                {% endfor %}
+
+                {% for digitalnu in app.session.flashBag.get('apartment3N') %}
+                	<div id="flash">{{ digitalnu }}</div>
+                {% endfor %}
+
+                {% for digitalnu in app.session.flashBag.get('house1') %}
+                	<div id="flash">{{ digitalnu }}</div>
+                {% endfor %}
+
+                {% for digitalnu in app.session.flashBag.get('house2') %}
+                	<div id="flash">{{ digitalnu }}</div>
+                {% endfor %}
+
+                {% for digitalnu in app.session.flashBag.get('house3') %}
+                	<div id="flash">{{ digitalnu }}</div>
+                {% endfor %}
+
+                {% for digitalnu in app.session.flashBag.get('house1N') %}
+                	<div id="flash">{{ digitalnu }}</div>
+                {% endfor %}
+
+                {% for digitalnu in app.session.flashBag.get('house2N') %}
+                	<div id="flash">{{ digitalnu }}</div>
+                {% endfor %}
+
+                {% for digitalnu in app.session.flashBag.get('house3N') %}
+                	<div id="flash">{{ digitalnu }}</div>
+                {% endfor %}
+
+                {% for shop in app.session.flashBag.get('shop1') %}
+                	<div id="flash">{{ shop }}</div>
+                {% endfor %}  
+
+                {% for shop1 in app.session.flashBag.get('shop2') %}
+                	<div id="flash">{{ shop1 }}</div>
+                {% endfor %}
+
+                {% for shop2 in app.session.flashBag.get('shop3') %}
+                	<div id="flash">{{ shop2 }}</div>
+                {% endfor %}
+
+                {% for shop3 in app.session.flashBag.get('shop1N') %}
+                	<div id="flash">{{ shop3 }}</div>
+                {% endfor %}
+
+                {% for shop4 in app.session.flashBag.get('shop2N') %}
+                	<div id="flash">{{ shop4 }}</div>
+                {% endfor %}
+
+                {% for shop5 in app.session.flashBag.get('shop3N') %}
+                	<div id="flash">{{ shop5 }}</div>
+                {% endfor %}              
+
+
+                <div class="row" style="margin-top:25px;">
+	                <div class="col-lg-12">
+	                    <div class="panel panel-primary">
+	                        <div class="panel-heading">
+	                            Modifier le statut d'un lot - Attribution d'un acheteur en cas de signature
+	                        </div>
+	                        <div class="panel-body">
+	                            <p> {{ form_start(form) }}</p>
+	                            <div class="col-md-3">
+	                            	<p> {{ form_row(form.plot) }}</p>
+	                            </div>
+	                            <div class="col-md-3">
+	                            	<p> {{ form_row(form.house) }}</p>
+	                            </div>
+	                            <div class="col-md-3">
+	                            	<p> {{ form_row(form.apartment) }}</p>
+	                            </div>
+	                            <div class="col-md-3">
+	                            	<p> {{ form_row(form.shop) }}</p>
+	                            </div>
+	                            <div class="col-md-6">
+	                            	<p> {{ form_row(form.state) }}</p>
+	                            </div>
+	                            <div class="col-md-6">
+	                            	<p> {{ form_row(form.user) }}</p>	                            
+	                            </div>
+	                        </div>
+	                        <div class="panel-footer text-center">
+	                            <p> {{ form_end(form) }}</p>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+
+                {% if listPlotsNotNull is not null and listPlotsNotNull is not empty %}
+	                <div class="row">
+						<div class="col-md-12">
+				            <div class="panel panel-primary">
+				                <div class="panel-heading">
+				                    <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Liste des parcelles</h3>
+				                </div>
+				                <div class="panel-body">
+				                    <div class="table-responsive">
+				                        <table class="table table-bordered table-hover table-striped" id="myTable">
+				                            <thead>
+				                                <tr>
+				                                    <th>Numéro</th>
+				                                    <th>Prix €</th>
+				                                    <th>Prix CFA</th>
+				                                    <th>Commentaire</th>
+				                                    <th>Etat</th>
+				                                    <th>Date de promesse</th>
+				                                    <th>Date de vente</th>
+				                                    <th>Acquéreur</th>				                                    
+				                                </tr>
+				                            </thead>
+				                            <tbody>
+				                                {% for plot in listPlotsNotNull %}
+				                                	<tr>
+					                                    <td>{{ plot.number }}</td>
+					                                    <td>{{ plot.price }} €</td>
+					                                    <td>{{ plot.priceCFA }} CFA</td>
+					                                    <td>{{ plot.comment|capitalize }}</td>
+					                                    <td>
+					                                    	{% if plot.state == 1 %}
+					                                    		<p style="color:rgb(244,128,36)";>Disponible</p>
+					                                    	{% elseif plot.state == 2 %}
+					                                    		<p style="color:rgb(134,201,123)";>Promesse signée</p>
+					                                    	{% else %}
+					                                    		<p style="color:rgb(69,131,237);">Lot vendu</p>
+					                                    	{% endif %}
+					                                    </td>
+					                                    <td>
+					                                    	{% if plot.datePromise is not null %}
+						                                    	{{ plot.datePromise|date('d-m-Y') }}
+						                                    {% endif %}
+					                                    </td>
+					                                    <td>
+					                                    	{% if plot.dateSold is not null %}
+						                                    	{{ plot.dateSold|date('d-m-Y') }}
+						                                    {% endif %}
+					                                    </td>
+					                                    <td>
+						                                    {% if plot.user is not null and plot.user is not empty %}					                 	
+						                                    	{{ plot.user.name|upper ~ ' ' ~ plot.user.firstname|capitalize }}		
+						                                    {% endif %}			
+					                                    </td>					                                    
+				                                	</tr>                                      
+					                            {% endfor %}
+				                            </tbody>
+				                        </table>
+				                    </div>				                    
+				                </div>
+				            </div>
+				        </div>
+				    </div>
+			    {% endif %}
+
+			    {% if listHousesNotNull is not null and listHousesNotNull is not empty %}
+				    <div class="row">
+						<div class="col-md-12">
+				            <div class="panel panel-primary">
+				                <div class="panel-heading">
+				                    <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Liste des maisons</h3>
+				                </div>
+				                <div class="panel-body">
+				                    <div class="table-responsive">
+				                        <table class="table table-bordered table-hover table-striped" id="myTable1">
+				                            <thead>
+				                                <tr>
+				                                    <th>Numéro</th>
+				                                    <th>Type</th>				                                    
+				                                    <th>Prix €</th>
+				                                    <th>Prix CFA</th>
+				                                    <th>Commentaire</th>
+				                                    <th>Etat</th>
+				                                    <th>Date de promesse</th>
+				                                    <th>Date de vente</th>
+				                                    <th>Acquéreur</th>				                                    
+				                                </tr>
+				                            </thead>
+				                            <tbody>
+				                                {% for house in listHousesNotNull %}
+				                                	<tr>
+					                                    <td>{{ house.id }}</td>
+					                                    <td>{{ house.type }}</td>					                                    
+					                                    <td>{{ house.price }} €</td>
+					                                    <td>{{ house.priceCFA }} CFA</td>
+					                                    <td>{{ house.comment|capitalize  }}</td>
+					                                    <td>
+					                                    	{% if house.state == 1 %}
+					                                    		<p style="color:rgb(244,128,36)";>Disponible</p>
+					                                    	{% elseif house.state == 2 %}
+					                                    		<p style="color:rgb(134,201,123)";>Promesse signée</p>
+					                                    	{% else %}
+					                                    		<p style="color:rgb(69,131,237);">Lot vendu</p>
+					                                    	{% endif %}
+					                                    </td>					                                   
+					                                    <td>
+					                                    	{% if house.datePromise is not null %}
+						                                    	{{ house.datePromise|date('d-m-Y') }}</td>
+						                                    {% endif %}
+					                                    </td>
+					                                    <td>
+						                                    {% if house.dateSold is not null %}
+						                                    	{{ house.dateSold|date('d-m-Y') }}</td>
+						                                    {% endif %}
+					                                    <td>
+						                                    {% if house.user is not null and house.user is not empty %}				                     	
+						                                    	{{ house.user.name|upper ~ ' ' ~ house.user.firstname|capitalize }}	
+						                                    {% endif %}				
+					                                    </td>					                                    
+				                                	</tr>                                            
+					                            {% endfor %}
+				                            </tbody>
+				                        </table>
+				                    </div>				                    
+				                </div>
+				            </div>
+				        </div>
+				    </div>
+			    {% endif %}
+
+
+			    {% if listApartmentsNotNull is not null and  listApartmentsNotNull is not empty %}
+				    <div class="row">
+						<div class="col-md-12">
+				            <div class="panel panel-primary">
+				                <div class="panel-heading">
+				                    <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Liste des appartements</h3>
+				                </div>
+				                <div class="panel-body">
+				                    <div class="table-responsive">
+				                        <table class="table table-bordered table-hover table-striped" id="myTable2">
+				                            <thead>
+				                                <tr>
+				                                    <th>Numéro</th>
+				                                    <th>Nbr pièces</th>
+				                                    <th>Surface</th>
+				                                    <th>Prix €</th>
+				                                    <th>Prix CFA</th>
+				                                    <th>Etage</th>
+				                                    <th>Commentaire</th>
+				                                    <th>Etat</th>
+				                                    <th>Date de promesse</th>
+				                                    <th>Date de vente</th>
+				                                    <th>Acquéreur</th>				                                    
+				                                </tr>
+				                            </thead>
+				                            <tbody>
+				                                {% for appart in listApartmentsNotNull %}
+				                                	<tr>
+					                                    <td>{{ appart.id }}</td>
+					                                    <td>{{ appart.nbrooms }}</td>
+					                                    <td>{{ appart.surface }} m²</td>
+					                                    <td>{{ appart.price }} €</td>
+					                                    <td>{{ appart.priceCFA }} CFA</td>
+					                                    <td>{{ appart.etage }}</td>
+					                                    <td>{{ appart.comment|capitalize }}</td>
+					                                    <td>
+					                                    	{% if appart.state == 1 %}
+					                                    		<p style="color:rgb(244,128,36)";>Disponible</p>
+					                                    	{% elseif appart.state == 2 %}
+					                                    		<p style="color:rgb(134,201,123)";>Promesse signée</p>
+					                                    	{% else %}
+					                                    		<p style="color:rgb(69,131,237);">Lot vendu</p>
+					                                    	{% endif %}
+					                                    </td>
+					                                    <td>					                                    	 
+					                                    	{% if appart.datePromise is not null %}
+						                                    	{{ appart.datePromise|date('d-m-Y') }}
+						                                    {% endif %}
+					                                    </td>					                                    
+					                                    <td>
+					                                    	{% if appart.dateSold is not null %}
+						                                    	{{ appart.dateSold|date('d-m-Y') }}
+						                                    {% endif %}
+					                                    </td>
+					                                    <td>
+					                                    	{% if appart.user is not null and appart.user is not empty %}					         	
+					                                    		{{ appart.user.name|upper ~ ' ' ~ appart.user.firstname|capitalize }}					
+					                                    	{% endif %}
+					                                    </td>					                                    
+				                                	</tr>                                            
+					                            {% endfor %}
+				                            </tbody>
+				                        </table>
+				                    </div>				                    
+				                </div>
+				            </div>
+				        </div>
+				    </div>
+			    {% endif %}
+
+			    {% if listShopsNotNull is not null and listShopsNotNull is not empty %}
+				    <div class="row">
+						<div class="col-md-12">
+				            <div class="panel panel-primary">
+				                <div class="panel-heading">
+				                    <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Liste des commerces </h3>
+				                </div>
+				                <div class="panel-body">
+				                    <div class="table-responsive">
+				                        <table class="table table-bordered table-hover table-striped" id="myTable1">
+				                            <thead>
+				                                <tr>
+				                                    <th>Numéro</th>
+				                                    <th>Type</th>				                                    
+				                                    <th>Prix €</th>
+				                                    <th>Prix CFA</th>
+				                                    <th>Commentaire</th>
+				                                    <th>Etat</th>
+				                                    <th>Date de promesse</th>
+				                                    <th>Date de vente</th>
+				                                    <th>Acquéreur</th>				                                    
+				                                </tr>
+				                            </thead>
+				                            <tbody>
+				                                {% for house in listShopsNotNull %}
+				                                	<tr>
+					                                    <td>{{ house.id }}</td>
+					                                    <td>{{ house.type }}</td>					                                    
+					                                    <td>{{ house.price }} €</td>
+					                                    <td>{{ house.priceCFA }} CFA</td>
+					                                    <td>{{ house.comment|capitalize  }}</td>
+					                                    <td>
+					                                    	{% if house.state == 1 %}
+					                                    		<p style="color:rgb(244,128,36)";>Disponible</p>
+					                                    	{% elseif house.state == 2 %}
+					                                    		<p style="color:rgb(134,201,123)";>Promesse signée</p>
+					                                    	{% else %}
+					                                    		<p style="color:rgb(69,131,237);">Lot vendu</p>
+					                                    	{% endif %}
+					                                    </td>					                                   
+					                                    <td>
+					                                    	{% if house.datePromise is not null %}
+						                                    	{{ house.datePromise|date('d-m-Y') }}</td>
+						                                    {% endif %}
+					                                    </td>
+					                                    <td>
+						                                    {% if house.dateSold is not null %}
+						                                    	{{ house.dateSold|date('d-m-Y') }}</td>
+						                                    {% endif %}
+					                                    <td>
+						                                    {% if house.user is not null and house.user is not empty %}				                     	
+						                                    	{{ house.user.name|upper ~ ' ' ~ house.user.firstname|capitalize }}	
+						                                    {% endif %}				
+					                                    </td>					                                    
+				                                	</tr>                                            
+					                            {% endfor %}
+				                            </tbody>
+				                        </table>
+				                    </div>				                    
+				                </div>
+				            </div>
+				        </div>
+				    </div>
+			    {% endif %}
+                
+	{% endblock %}
+
+
+	

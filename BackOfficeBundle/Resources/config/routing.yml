@@ -1,0 +1,119 @@
+back_office_homepage:
+    path:     /backoffice/dashboard
+    defaults: { _controller: BackOfficeBundle:Dashboard:dashboard }
+
+# Gestion des projets:
+back_project_admin:
+    path:     /backoffice/project/admin/{affich}/{id}
+    defaults: { _controller: BackOfficeBundle:Project:admin}
+    requirements:
+        affich: "[1-2]+"
+        id: "[0-9]+"
+
+back_project_activate:
+    path:     /backoffice/project/activate/{id}
+    defaults: { _controller: BackOfficeBundle:Project:activate}
+    requirements:
+        id: "[0-9]+"
+
+back_project_desactivate:
+    path:     /backoffice/project/desactivate/{id}
+    defaults: { _controller: BackOfficeBundle:Project:desactivate}
+    requirements:
+        id: "[0-9]+"
+
+# Gestion des lots composant les projets:
+back_lots_listByProject:
+    path:    /backoffice/lots/listByProject/{idProject}
+    defaults: { _controller: BackOfficeBundle:Lots:listByProject}
+    requirements:
+        idProject: "[0-9]+"
+
+# Gestion des users:
+back_user_list:
+    path:     /backoffice/lots/user/listUsersByProject
+    defaults: { _controller: BackOfficeBundle:User:listUsersByProject}
+    requirements:
+        id: "[0-9]+"
+
+# Gestion du texte de présentation:
+back_article_homepage_create:
+    path:     /backoffice/article/homepage/create 
+    defaults: { _controller: BackOfficeBundle:Article:create}
+
+# Gestion des Partenaires:
+back_partner_listandcreate:
+    path:     /backoffice/partner/listandcreate 
+    defaults: { _controller: BackOfficeBundle:Partner:listandcreate}
+
+back_partner_desactivate:
+    path:    /backoffice/partner/desactivate/{id}
+    defaults: { _controller: BackOfficeBundle:Partner:desactivate}
+    requirements:
+        id: "[0-9]+"
+
+back_partner_activate:
+    path:    /backoffice/partner/activate/{id}
+    defaults: { _controller: BackOfficeBundle:Partner:activate}
+    requirements:
+        id: "[0-9]+"
+
+back_partner_delete:
+    path:    /backoffice/partner/delete/{id}
+    defaults: { _controller: BackOfficeBundle:Partner:delete}
+    requirements:
+        id: "[0-9]+"
+
+
+
+# Gestion de l'onglet about:
+back_members_about:
+    path:     /backoffice/members/create 
+    defaults: { _controller: BackOfficeBundle:Member:create}
+
+back_member_desactivate:
+    path:    /backoffice/members/desactivate/{idMember}
+    defaults: { _controller: BackOfficeBundle:Member:desactivate}
+    requirements:
+        idMember: "[0-9]+"
+
+back_member_activate:
+    path:    /backoffice/members/activate/{idMember}
+    defaults: { _controller: BackOfficeBundle:Member:activate}
+    requirements:
+        idMember: "[0-9]+"
+
+# Gestion des messages:
+back_message_list:
+    path:     /back_office/message/list 
+    defaults: { _controller: BackOfficeBundle:Message:list}
+
+back_message_readMessage:
+    path:    /back_office/message/readMessage/{id} 
+    defaults: { _controller: BackOfficeBundle:Message:readMessage}
+    requirements:
+        id: "[0-9]+"
+
+back_message_unReadMessage:
+    path:    /back_office/message/unReadMessage/{id} 
+    defaults: { _controller: BackOfficeBundle:Message:unReadMessage}
+    requirements:
+        id: "[0-9]+"
+
+back_message_answeredMessage:
+    path:    /back_office/message/answeredMessage/{id} 
+    defaults: { _controller: BackOfficeBundle:Message:answeredMessage}
+    requirements:
+        id: "[0-9]+"
+
+back_message_unAnsweredMessage:
+    path:    /back_office/message/unAnsweredMessage/{id} 
+    defaults: { _controller: BackOfficeBundle:Message:unAnsweredMessage}
+    requirements:
+        id: "[0-9]+"
+
+back_message_delete:
+    path:    /back_office/message/delete/{id}
+    defaults: { _controller: BackOfficeBundle:Message:delete}
+    requirements: 
+        id: "[0-9]+"

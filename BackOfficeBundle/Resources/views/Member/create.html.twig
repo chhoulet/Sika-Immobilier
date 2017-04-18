@@ -1,0 +1,116 @@
+{% extends '::baseAdmin.html.twig' %}
+
+	{% block title %}Ajouter un membre de l'équipe{% endblock %}
+
+	{% block body %}
+
+		<div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Gestion de l'équipe</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+            {% for message in app.session.flashBag.get('createMember') %}
+            	<div id="flash">{{ message }}</div>
+            {% endfor %}
+
+            {% for messag in app.session.flashBag.get('desactivate') %}
+            	<div id="flash">{{ messag }}</div>
+            {% endfor %}
+
+            <div class="row">
+	            <div class="col-lg-12" style="margin-bottom:25px;">
+	                <div class="panel panel-yellow">
+	                    <div class="panel-heading">
+	                        Ajouter un membre de l'équipe
+	                    </div>
+	                    <div class="panel-body" style="text-align:center;">
+	                        <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">
+							    Ajouter un membre à l'équipe
+							</button>
+	                    </div>
+	                    <div class="panel-footer">
+	                       
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+            <!-- Button trigger modal -->
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Liste des membres de l'équipe</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover table-striped" id="myTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Nom & Prénom</th>
+                                            <th>Age</th>
+                                            <th>Fonction</th>
+                                            <th>Description</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for member in listAllMembers %}
+                                            <tr>
+                                                <td>{{ member.name|upper ~' '~ member.firstname|capitalize }}</td>
+                                                <td>{{ member.age}}</td>
+                                                <td>{{ member.job|capitalize}}</td>
+                                                <td>{{ member.description}}</td>                                                
+                                                <td>
+                                                	{% if member.active == 1 %}
+                                                		<a href="{{ path('back_member_desactivate',{idMember:member.id}) }}"><button class="btn btn-warning">Désactiver</button></a>
+                                                	{% else %}
+                                                		<a href="{{ path('back_member_activate',{idMember:member.id}) }}"><button class="btn btn-success">Activer</button></a>
+                                                	{% endif %}
+                                                </td>
+                                            </tr>
+                                        {% endfor %}                                            
+                                    </tbody>                                        
+                                </table>
+                            </div>                                
+                        </div>
+                    </div>
+                </div>
+            </div>
+			
+
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			    <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+					    <div class="modal-header">
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					        <h4 class="modal-title" id="myModalLabel">Créer un membre</h4>
+					    </div>
+				        <div class="modal-body">
+				        	{{ form_start(form)}}
+				        	{{ form_row(form.name)}}
+				        	{{ form_row(form.firstname)}}
+				        	{{ form_row(form.gender)}}
+				        	{{ form_row(form.job)}}
+				        	{{ form_row(form.age)}}
+				        	{{ form_row(form.description)}}
+				        	{% for img in form.image %}
+				        		{{ form_row(img.filename) }}
+				        		{{ form_row(img.filename1) }}
+				        		{{ form_row(img.filename2) }}
+				        		{{ form_row(img.filename3) }}
+				        	{% endfor %}				        	
+				        </div>
+				        <div class="modal-footer" style="margin-top:25px;text-align:center;">
+				        	{{ form_end(form)}}				        				        
+				      	</div>
+				    </div>
+				</div>
+			</div>
+	{% endblock %}

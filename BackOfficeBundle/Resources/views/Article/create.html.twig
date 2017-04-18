@@ -1,0 +1,44 @@
+{% extends '::baseAdmin.html.twig' %}
+
+	{% block title %}Article en homepage - création {% endblock %}
+
+	{% block body %}
+
+		<div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            <div style="margin-bottom:15px;" class="col-md-12">Texte de présentation de la société</div>
+                        </h1>                              
+                    </div>
+                </div>
+
+                <div class="row">
+                	<div class="col-md-12">
+                		{{ form_start(form)}}
+                		{{ form_row(form.title)}}
+                		{{ form_row(form.subtitle1)}}
+                		{{ form_row(form.subtitle2)}}
+                		{{ form_row(form.text1)}}
+                		{{ form_row(form.text2)}}
+                		{{ form_row(form.text3)}}
+                		{{ form_row(form.text4)}}
+                			{% for img in form.image %}
+                			    {{ form_row(img.filename) }}
+                			    {{ form_row(img.filename1) }}
+                			    {{ form_row(img.filename2) }}
+                			    {{ form_row(img.filename3) }}
+                			{% endfor %}
+                		{{ form_end(form)}}
+                	</div>
+                </div>
+
+            </div>
+
+        </div>
+
+    {% endblock %}

@@ -1,0 +1,142 @@
+ {% extends '::baseAdmin.html.twig' %}
+
+	{% block title %}Liste des messages{% endblock %}
+
+	{% block body %}
+
+		<div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            <div style="margin-bottom:15px;" class="col-md-12">Messages reçus :</div>
+                        </h1>                             
+                    </div>
+                </div>
+
+                {% for message in app.session.flashBag.get('deleteMessage') %}
+                	<div id="flash">{{ message }}</div>
+                {% endfor %}
+
+                {% for messag in app.session.flashBag.get('readMessage') %}
+                	<div id="flash">{{ messag }}</div>
+                {% endfor %}
+
+                {% for messa in app.session.flashBag.get('unreadMessage') %}
+                	<div id="flash">{{ messa }}</div>
+                {% endfor %}
+
+                {% for mess in app.session.flashBag.get('answeredMessage') %}
+                	<div id="flash">{{ mess }}</div>
+                {% endfor %}
+
+                {% for mes in app.session.flashBag.get('unansweredMessage') %}
+                	<div id="flash">{{ mes }}</div>
+                {% endfor %}
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" style="background-color: rgb(244,215,66);">
+                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Liste</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-striped" id="myTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Nom</th>
+                                                <th>Mail</th>
+                                                <th>Téléphone</th>
+                                                <th>Objectif</th>
+                                                <th>Projet</th>
+                                                <th>Type de bien</th>
+                                                <th>Message</th>
+                                                <th>Statut</th>
+                                                <th>Date d'envoi</th>
+                                                <th>Date réponse</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+	                                        {% for message in listMessages %}
+	                                            <tr>
+	                                                <td>{{ message.nom|upper }}</td>
+	                                                <td>{{ message.mail }}</td>
+	                                                <td>{{ message.phone }}</td>
+	                                                <td>
+	                                                	{% if message.purpose == 1 %}
+	                                                		<p>Prise de RDV France</p>
+	                                                	{% elseif message.purpose == 2 %}
+	                                                		<p>Prise de RDV Paris</p>
+	                                                	{% elseif message.purpose == 3 %}
+	                                                		<p>Prise de RDV Gabon</p>
+	                                                	{% elseif message.purpose == 4 %}
+	                                                		<p>Demande d'informations</p>
+	                                                	{% elseif message.purpose == 5 %}
+	                                                		<p>Rappellez-moi</p>
+	                                                	{% endif %}
+	                                                </td>
+                                                    <td>{{message.project.name|upper}}</td>
+                                                    <td>
+                                                        {% if message.typeOfLot == 1 %}
+                                                            <p>Maison</p>
+                                                        {% elseif message.typeOfLot == 2 %}
+                                                            <p>Terrain</p>
+                                                        {% elseif message.typeOfLot == 3 %}
+                                                            <p>Appartement</p>
+                                                        {% elseif message.typeOfLot == 4 %}
+                                                            <p>Commerce</p>                                                       
+                                                        {% endif %}
+                                                    </td>
+	                                                <td>{{ message.main }}</td>                                                
+	                                                <td>
+	                                                	{% if message.state == 1 %}
+	                                                		<p>Message non lu</p>
+	                                                	{% elseif message.state == 2 %}
+	                                                		<p style="color:green;">Message lu</p>
+	                                                	{% elseif message.state == 3 %}
+	                                                		<p style="color:blue;">Réponse envoyée </p>
+	                                                	{% endif %}
+	                                                </td>
+	                                                <td>
+	                                                	{% if message.dateCreated is not null %}
+	                                                		{{ message.dateCreated|date('d-m-Y') }}
+	                                                	{% endif %}
+	                                                </td>
+	                                                <td>
+	                                                	{% if message.dateAnswered is not null %}
+	                                                		{{ message.dateAnswered|date('d-m-Y') }}
+	                                                	{% endif %}
+	                                                </td>
+	                                                <td>
+	                                                	{% if message.state == 1 %}
+	                                                		<a href="{{ path('back_message_readMessage',{id:message.id}) }}" title="Marquer comme lu"><button style="margin-bottom:10px;" class="btn btn-success">Lu</button></a>
+	                                                	{% elseif message.state == 2 %}
+	                                                		<a href="{{ path('back_message_unReadMessage',{id:message.id}) }}" title="Marquer comme non lu"><button style="margin-bottom:10px;" class="btn btn-warning">Non Lu</button></a>
+	                                                		<a href="{{ path('back_message_answeredMessage',{id:message.id}) }}" title="Marquer comme Réponse envoyée"><button class="btn btn-success">Réponse envoyée</button></a>
+	                                                	{% elseif message.state == 3 %}
+	                                                		<a href="{{ path('back_message_unAnsweredMessage',{id:message.id}) }}" title="Marquer comme Réponse  non envoyée"><button style="margin-bottom:10px;" class="btn btn-warning">Réponse non envoyée</button></a>
+	                                                		<a href="{{ path('back_message_unReadMessage',{id:message.id}) }}" title="Marquer comme non lu"><button style="margin-bottom:10px;" class="btn btn-primary">Non Lu</button></a>
+	                                                	{% endif %}
+	                                                	<a href="{{ path('back_message_delete',{id:message.id}) }}" title="Supprimer" onclick="return(confirm('Etes-vous sûr de vouloir supprimer ce message ?'))"><button class="btn btn-danger">Supprimer ce message</button></a>                                                	
+	                                                </td>
+	                                            </tr>
+	                                        {% endfor %}                                      
+                                        </tbody>
+                                    </table>
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+
+	{% endblock %}
