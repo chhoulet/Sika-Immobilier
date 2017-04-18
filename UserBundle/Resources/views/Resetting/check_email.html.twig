@@ -1,0 +1,23 @@
+{% extends '::baseLogin.html.twig' %}
+
+	{% block title %}Confirmation d'inscription{% endblock %}
+
+	{% block body %}
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 text-center" style="height:470px;width:600px;margin-top:125px;margin-left:300px;background-color: rgb(209, 229, 180);">	 <h2 style="margin-bottom:30px;margin-top:25px;">Nouveau mot de passe</h2>
+						{% block fos_user_content %}					    	
+						    <div style="text-align: center;margin-top: 25px;">							        
+								<p><strong>Un mail vient de vous être envoyé. Cliquez sur le lien pour obtenir votre nouveau mot de passe.</strong></p>
+								<p><strong>Note : vous ne pouvez faire qu'une demande de mot de passe par 24 heures.</strong></p>
+								<div class="col-md-12 text-center"><a href="{{ path('front_office_homepage') }}"><button style="text-align: center;margin-top: 35px;" class="btn btn-success">Retour à l'accueil</button></a>
+								</div>
+								<!-- <div class="col-md-6 text-center"><a href="{{ path('fos_user_profile_show') }}"><button style="text-align: center;margin-top: 35px;" class="btn btn-warning">Voir mon profil</button></a>
+								</div>  -->  
+						    </div>
+						{% endblock fos_user_content %}
+				</div>
+			</div>
+		</div>
+
+	{% endblock %}

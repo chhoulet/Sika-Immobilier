@@ -1,0 +1,21 @@
+{% extends '::baseLogin.html.twig' %}
+
+	{% block title %}Confirmation d'inscription{% endblock %}
+
+	{% block body %}
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 text-center" style="height:470px;width:600px;margin-top:125px;margin-left:300px;background-color: rgb(209, 229, 180);">	 <h2 style="margin-bottom:30px;margin-top:25px;">Confirmation d'inscription</h2>
+						{% block fos_user_content %}					    	
+						    <div style="text-align: center;margin-top: 25px;">							        
+								<p><strong>Félicitations ! Vous avez créé votre compte avec succès !</strong></p>
+								<p><strong>Vous pouvez maintenant accéder à toutes les options réservées à nos membres.</strong></p>
+								<div class="col-md-6 text-center"><a href="{{ path('front_office_homepage') }}"><button style="text-align: center;margin-top: 35px;" class="btn btn-success">Retour à l'accueil</button></a></div>
+								<div class="col-md-6 text-center"><a href="{{ path('fos_user_profile_show') }}"><button style="text-align: center;margin-top: 35px;" class="btn btn-warning">Voir mon profil</button></a></div>   
+						    </div>
+						{% endblock fos_user_content %}
+				</div>
+			</div>
+		</div>
+
+	{% endblock %}

@@ -1,0 +1,64 @@
+{% extends '::baseLogin.html.twig' %}
+	
+	{% block body %}
+		
+		<div class="container">
+
+			<div class="row">
+				<div class="col-lg-12" style="height:270px;width:580px;margin-top:125px;margin-left:300px;background-color: rgb(201, 219, 184);">
+					<h2 style="text-align: center;margin-top: 25px;margin-bottom:45px;">Connectez-vous :</h2>			  
+					  <!-- Trigger the modal with a button -->
+					  <div style="text-align: center;"><button type="button" class="btn btn-success btn-lg" id="myBtn">Connection</button></div>
+
+			          <!-- Modal -->
+					  <div class="modal fade" id="myModal" role="dialog">
+					    <div class="modal-dialog">
+					    
+					        <!-- Modal content-->
+						    <div class="modal-content">
+						      	{% block fos_user_content %}
+							    	{% if error %}
+									    <div class="col-md-12" style="background-color:red;height:40px;margin-bottom:15px;text-align:center;">
+									    	<strong>Vos identifiants ne sont pas valides !</strong>
+									    </div>
+									{% endif %}
+
+							        <div class="modal-header" style="padding:35px 50px;">
+							            <button type="button" class="close" data-dismiss="modal">&times;</button>
+							            <h4><span class="glyphicon glyphicon-lock"></span> Connection</h4>
+							        </div>
+						        	<div class="modal-body" style="padding:40px 50px;">
+								          <form action="{{ path("fos_user_security_check") }}" method="post">
+											    {% if csrf_token %}
+											        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+											    {% endif %}
+								            <div class="form-group">
+								              	<label for="username"><span class="glyphicon glyphicon-user"></span> Nom d'utilisateur :</label>
+								              	<input type="text" class="form-control" id="username" name="_username" required="required"  placeholder="Saisissez votre username">
+								            </div>
+								            <div class="form-group">
+								              	<label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Mot de passe :</label>
+								              	<input type="password" id="password" name="_password" required="required" class="form-control" id="psw" placeholder="Saisissez votre mot de passe">
+								            </div>
+								            <div class="checkbox">
+								             	<label><input type="checkbox" value="" checked>Se souvenir de moi</label>
+								            </div>
+								              	<button type="submit" id="_submit" name="_submit" class="btn btn-success btn-block" value="Connection"><span class="glyphicon glyphicon-off"></span> Connection</button>
+								          </form>
+						        	</div>
+							        <div class="modal-footer">
+							          	<button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Annuler</button>
+							          	<p>Non encore enregistré? <a href="{{ path('fos_user_registration_register') }}">Créez votre compte</a></p>
+							          	<p><a href="{{ path('fos_user_resetting_request') }}">Mot de passe oublié ?</a></p>
+							        </div>
+						        {% endblock fos_user_content %}
+						    </div>
+			      
+			   			</div>
+			        </div> 
+				
+		</div>
+
+	{% endblock %}
+
+	

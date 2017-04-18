@@ -1,0 +1,288 @@
+{% extends '::base.html.twig' %}
+
+	{% block title %}Mon espace{% endblock %}
+
+	{% block body %}
+
+		<div class="container">
+
+			{% for message in app.session.flashBag.get('editProfile') %}
+				<div id="flash">{{ message }}</div>
+			{% endfor %}
+
+			<div class="row">
+				<div class="box">
+					<div class="col-md-12">				
+	                    <div class="panel panel-info">
+	                        <div class="panel-heading">
+	                            Afficher mon profil
+	                        </div>
+	                        <div class="panel-body" style="text-align:center;margin-top:20px;margin-bottom:20px;">
+	                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+								  	Voir mon profil
+								</button>
+	                        </div>
+	                        <div class="panel-footer">                            
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+            </div>
+
+            <div class="row">
+				<div class="box">
+					<div class="col-md-12">				
+	                    <div class="panel panel-info">
+	                    	{% if listPlots is not null %}
+		                        <div class="panel-heading">
+		                            Ma parcelle :
+		                        </div>
+		                        <div class="panel-body" style="text-align:center;margin-top:20px;margin-bottom:20px;">
+		                            <div class="table-responsive">
+	                                    <table class="table table-bordered table-hover table-striped">
+	                                        <thead>
+	                                            <tr>
+				                                    <th>Numéro</th>
+				                                    <th>Prix €</th>
+				                                    <th>Prix CFA</th>
+				                                    <th>Commentaire</th>
+				                                    <th>Etat</th>
+				                                    <th>Date de promesse</th>
+				                                    <th>Date de vente</th>                          				                                    
+				                                </tr>
+				                            </thead>
+				                            <tbody>
+				                                {% for plot in listPlots %}
+				                                	<tr>
+					                                    <td>{{ plot.number }}</td>
+					                                    <td>{{ plot.price }} €</td>
+					                                    <td>{{ plot.priceCFA }} CFA</td>
+					                                    <td>{{ plot.comment|capitalize }}</td>
+					                                    <td>
+					                                    	{% if plot.state == 1 %}
+					                                    		<p style="color:rgb(244,128,36)";>Disponible</p>
+					                                    	{% elseif plot.state == 2 %}
+					                                    		<p style="color:rgb(134,201,123)";>Promesse signée</p>
+					                                    	{% else %}
+					                                    		<p style="color:rgb(69,131,237);">Lot acheté</p>
+					                                    	{% endif %}
+					                                    </td>
+					                                    <td>
+					                                    	{% if plot.datePromise is not null %}
+						                                    	{{ plot.datePromise|date('d-m-Y') }}
+						                                    {% endif %}
+					                                    </td>
+					                                    <td>
+					                                    	{% if plot.dateSold is not null %}
+						                                    	{{ plot.dateSold|date('d-m-Y') }}
+						                                    {% endif %}
+					                                    </td>                             					                                    
+				                                	</tr>                                      
+					                            {% endfor %}
+				                            </tbody>
+		                                    </tbody>
+		                                </table>
+		                            </div>                	
+		                        </div>
+		                        <div class="panel-footer">                            
+		                        </div>
+		                    {% endif %}
+		                    
+		                    {% if listHouses is not null and listHouses is not empty %}
+		                        <div class="panel-heading">
+		                            Ma maison :
+		                        </div>
+		                        <div class="panel-body" style="text-align:center;margin-top:20px;margin-bottom:20px;">
+		                            <div class="table-responsive">
+	                                   <table class="table table-bordered table-hover table-striped">
+				                            <thead>
+				                                <tr>
+				                                    <th>Numéro</th>
+				                                    <th>Type</th>				                                    
+				                                    <th>Prix €</th>
+				                                    <th>Prix CFA</th>
+				                                    <th>Commentaire</th>
+				                                    <th>Images</th>                                
+				                                    <th>Etat</th>
+				                                    <th>Date de promesse</th>
+				                                    <th>Date de vente</th>
+				                                </tr>
+				                            </thead>
+				                            <tbody>
+				                                {% for house in listHouses %}
+				                                	<tr>
+					                                    <td>{{ house.id }}</td>
+					                                    <td>{{ house.type }}</td>					                                    
+					                                    <td>{{ house.price }} €</td>
+					                                    <td>{{ house.priceCFA }} CFA</td>
+					                                    <td>{{ house.comment|capitalize  }}</td>
+					                                    <td>
+						                                	{% for image in house.image %}
+						                                		<div class="zoom">
+						                                			<div class="image">
+						                                				<a href="{{ asset('uploads/images/'~image.filename) }}" rel='gallery' class='pirobox_gall'><img src="{{ asset('uploads/images/'~image.filename) }}" alt="" style="height:120px;width:190px;margin-top:10px;"></a>
+						                                			</div>
+						                                		</div>
+																<div class="zoom">
+																	<div class="image">
+						                                				<a href="{{ asset('uploads/images/'~image.filename1) }}" rel='gallery' class='pirobox_gall'><img src="{{ asset('uploads/images/'~image.filename1) }}" alt="" style="height:120px;width:190px;margin-top:10px;"></a>
+						                                			</div>
+						                                		</div>
+																<div class="zoom">
+																	<div class="image">
+						                                				<a href="{{ asset('uploads/images/'~image.filename2) }}" rel='gallery' class='pirobox_gall'><img src="{{ asset('uploads/images/'~image.filename2) }}" alt="" style="height:120px;width:190px;margin-top:10px;"></a>
+						                                			</div>
+						                                		</div>
+																<div class="zoom">
+																	<div class="image">
+						                                				<a href="{{ asset('uploads/images/'~image.filename3) }}" rel='gallery' class='pirobox_gall'><img src="{{ asset('uploads/images/'~image.filename3) }}" alt="" style="height:120px;width:190px;margin-top:10px;"></a>
+						                                			</div>
+						                                		</div>
+						                                	{% endfor %}
+						                                </td>            
+					                                    <td>
+					                                    	{% if house.state == 1 %}
+					                                    		<p style="color:rgb(244,128,36)";>Disponible</p>
+					                                    	{% elseif house.state == 2 %}
+					                                    		<p style="color:rgb(134,201,123)";>Promesse signée</p>
+					                                    	{% else %}
+					                                    		<p style="color:rgb(69,131,237);">Lot vendu</p>
+					                                    	{% endif %}
+					                                    </td>					                                   
+					                                    <td>
+					                                    	{% if house.datePromise is not null %}
+						                                    	{{ house.datePromise|date('d-m-Y') }}</td>
+						                                    {% endif %}
+					                                    </td>
+					                                    <td>
+						                                    {% if house.dateSold is not null %}
+						                                    	{{ house.dateSold|date('d-m-Y') }}</td>
+						                                    {% endif %}        					                                                    
+				                                	</tr>                                            
+					                            {% endfor %}
+				                            </tbody>
+				                        </table>
+		                            </div>                	
+		                        </div>
+		                        <div class="panel-footer">                            
+		                        </div>
+		                    {% endif %}
+		                    {% if listApartments is not null and listApartments is not empty %}
+		                        <div class="panel-heading">
+		                            Mon appartement :
+		                        </div>
+		                        <div class="panel-body" style="text-align:center;margin-top:20px;margin-bottom:20px;">
+		                            <div class="table-responsive">
+	                                    <table class="table table-bordered table-hover table-striped">
+				                            <thead>
+				                                <tr>
+				                                    <th>Numéro</th>
+				                                    <th>Nbr pièces</th>
+				                                    <th>Surface</th>
+				                                    <th>Prix €</th>
+				                                    <th>Prix CFA</th>
+				                                    <th>Etage</th>
+				                                    <th>Commentaire</th>
+				                                    <th>Etat</th>
+				                                    <th>Date de promesse</th>
+				                                    <th>Date de vente</th>
+				                                    				                                    
+				                                </tr>
+				                            </thead>
+				                            <tbody>
+				                                {% for appart in listApartments %}
+				                                	<tr>
+					                                    <td>{{ appart.id }}</td>
+					                                    <td>{{ appart.nbrooms }}</td>
+					                                    <td>{{ appart.surface }} m²</td>
+					                                    <td>{{ appart.price }} €</td>
+					                                    <td>{{ appart.priceCFA }} CFA</td>
+					                                    <td>{{ appart.etage }}</td>
+					                                    <td>{{ appart.comment|capitalize }}</td>
+					                                    <td>
+					                                    	{% if appart.state == 1 %}
+					                                    		<p style="color:rgb(244,128,36)";>Disponible</p>
+					                                    	{% elseif appart.state == 2 %}
+					                                    		<p style="color:rgb(134,201,123)";>Promesse signée</p>
+					                                    	{% else %}
+					                                    		<p style="color:rgb(69,131,237);">Lot vendu</p>
+					                                    	{% endif %}
+					                                    </td>
+					                                    <td>					                                    	 
+					                                    	{% if appart.datePromise is not null %}
+						                                    	{{ appart.datePromise|date('d-m-Y') }}
+						                                    {% endif %}
+					                                    </td>					                                    
+					                                    <td>
+					                                    	{% if appart.dateSold is not null %}
+						                                    	{{ appart.dateSold|date('d-m-Y') }}
+						                                    {% endif %}
+					                                    </td>                              					                                    
+				                                	</tr>                                            
+					                            {% endfor %}
+				                            </tbody>
+				                        </table>
+		                            </div>                	
+		                        </div>
+		                        <div class="panel-footer">                            
+		                        </div>
+		                    {% endif %}
+	                    </div>
+	                </div>
+	            </div>
+            </div>		
+
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header" style="background-color:rgb(107,138,71);">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			           <span aria-hidden="true">&times;</span>
+			        </button>
+			        <h4 class="modal-title" id="myModalLabel">Mon profil</h4>
+			      </div>
+			      <div class="modal-body">
+			        {% block fos_user_content %}
+						<div class="fos_user_user_show">
+						    <p>Username : {{ user.username }}</p>
+						    <p>Mail : {{ user.email }}</p>
+						    <p>Nom : {{ user.name }}</p>
+						    <p>Prénom : {{ user.firstname }}</p>
+						    <p>Adresse : {{ user.adress ~' '~ user.city }}</p>
+						    <p>Code postal : {{ user.postcode }}</p>						   					   
+						</div>
+					{% endblock fos_user_content %}
+			      </div>
+			      <div class="modal-footer">
+					    <div class="col-md-12">
+						    <div class="col-md-6" style="text-align:center;"><button type="button" class="btn btn-danger" data-dismiss="modal" >Fermer</button></div>
+						    <div class="col-md-6" style="text-align:center;"><a href="{{ path('fos_user_profile_edit') }}"><button type="button" class="btn btn-primary">Editer mon profil</button></a></div>
+					    </div>			        
+			      </div>
+			    </div>
+			  </div>
+			</div>
+
+		</div>
+
+	{% endblock %}
+
+	{% block javascript %}
+        {{ parent() }}
+        <script type="text/javascript" src="{{ asset('piroboxbeta_1_1/js/pirobox_extended_feb_2011.js') }}"></script>
+        <script type="text/javascript">
+        $(document).ready(function() {
+            $.piroBox_ext({
+            piro_speed :700,
+            bg_alpha : 0.5,
+            piro_scroll : true,
+            piro_drag :false,
+            piro_nav_pos: 'bottom'
+            });
+            $('.pirobox_gall').css({   
+                width : '400px', // largeur de 300px
+                height : '300px')
+                    });
+        </script>        
+    {% endblock %}

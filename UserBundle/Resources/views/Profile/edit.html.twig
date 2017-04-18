@@ -1,0 +1,69 @@
+{% extends '::baseLogin.html.twig' %}
+
+	{% block title %}Editer mon profil{% endblock %}
+
+	{% block body %}
+
+		<div class="container">					
+
+			<div class="row">
+				<div class="col-lg-12" style="height:270px;width:580px;margin-top:125px;margin-left:300px;background-color: rgb(201, 219, 184);">
+					<h2 style="text-align: center;margin-top: 25px;margin-bottom:45px;">Editez votre compte</h2>			  
+					  <!-- Trigger the modal with a button -->
+					<div style="text-align: center;">
+					  		<button type="button" class="btn btn-success btn-lg" id="myBtn">Modifiez vos données personnelles</button>
+					</div>
+
+			          <!-- Modal -->
+					<div class="modal fade" id="myModal" role="dialog">
+					    <div class="modal-dialog">
+					    
+					        <!-- Modal content-->
+						    <div class="modal-content">
+
+								{% block fos_user_content %}
+									{{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+									    
+									    <div class="modal-header" style="padding:35px 50px;">
+								            <button type="button" class="close" data-dismiss="modal">&times;</button>
+								            <h4><span class="glyphicon glyphicon-lock"></span> Modifiez votre compte</h4>
+								        </div>
+							        	<div class="modal-body" style="padding:40px 50px;">
+							                <label style="margin-top:15px;"><span class="glyphicon glyphicon-user"></span> Nom d'utilisateur :</label>
+										    	{{ form_widget(form.username) }}
+										    <label style="margin-top:15px;"><span class="glyphicon glyphicon-user"></span> Nom :</label>
+										    	{{ form_widget(form.name) }}
+										    <label style="margin-top:15px;"><span class="glyphicon glyphicon-user"></span> Prénom :</label>
+										    	{{ form_widget(form.firstname) }}
+										    <label style="margin-top:15px;"><span class="glyphicon glyphicon-envelope"></span> Email :</label>
+										    	{{ form_widget(form.email) }}
+										    <label style="margin-top:15px;"><span class="glyphicon glyphicon-phone-alt"></span> Téléphone :</label>
+										    	{{ form_widget(form.phone) }}
+										    <label style="margin-top:15px;"><span class="glyphicon glyphicon-home"></span> Adresse :</label>
+										    	{{ form_widget(form.adress) }}
+										    <label style="margin-top:15px;"><span class="glyphicon glyphicon-home"></span> Code postal :</label>
+										    	{{ form_widget(form.postcode) }}
+										    <label style="margin-top:15px;"><span class="glyphicon glyphicon-home"></span> Ville :</span></label>
+										    	{{ form_widget(form.city) }} <br>
+										    	<div  style="text-align: center;margin-top: 25px;">
+										    		{{ form_end(form) }}
+										    	</div>
+							        	</div>
+								        <div class="modal-footer">
+								        	<div class="col-md-12" style="text-align: center;margin-top: 25px;">							        
+													
+								          		<button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Fermer</button>							          	
+											</div>
+								        </div>				
+								{% endblock fos_user_content %}
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+	{% endblock %}
